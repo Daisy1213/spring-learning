@@ -2,16 +2,16 @@ package hello;
 
 public class Greeting {
 
-    private final long id;
+    private final long counter;
     private final String content;
 
-    public Greeting(long id, String content) {
-        this.id = id;
+    public Greeting(long counter, String content) {
+        this.counter = counter;
         this.content = content;
     }
 
-    public long getId() {
-        return id;
+    public long getCounter() {
+        return counter;
     }
 
     public String getContent() {
