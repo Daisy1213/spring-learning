@@ -27,11 +27,10 @@ public class GreetingController {
                 String.format(template, name));
     }
 
-    @PutMapping("/greeting/{name}/{counter}")
-    public Greeting updateCounter(@PathVariable String name, @PathVariable Long counter) {
-        counterMap.put(name, counter);
+    @PutMapping("/greeting/{name}")
+    public Greeting updateCounter(@PathVariable String name, @RequestBody CounterBody body) {
+        counterMap.put(name, body.getCounter());
 
         return new Greeting(counterMap.get(name), String.format(template, name));
     }
-
 }
