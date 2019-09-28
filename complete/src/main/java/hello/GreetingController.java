@@ -2,47 +2,38 @@ package hello;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 public class GreetingController {
+    private GreetingService greetingService;
 
-    private Map<String, Long> counterMap = new HashMap<>();
+    public GreetingController(GreetingService greetingService) {
+        this.greetingService = greetingService;
+    }
 
     @RequestMapping("/greeting/{name}")
     public Greeting getOne(@PathVariable String name) {
-        Long counter = counterMap.get(name);
-        if (counter == null) {
-            throw new NotFoundException();
-        }
-
-        return new Greeting(name, counter);
+        return greetingService.getByName(name);
     }
 
     @PutMapping("/greeting/{name}")
     public Greeting updateCounter(@PathVariable String name, @RequestBody CounterBody body) {
-        counterMap.put(name, body.getCounter());
-
-        return new Greeting(name, counterMap.get(name));
-    }
+        return greetingService.update(name, body);
+        }
 
     @PostMapping("/greeting")
     public Greeting add(@RequestBody Greeting body) {
-        String name = body.getName();
-        Long counter = body.getCounter();
-        counterMap.put(name, counter);
-
-        return new Greeting(name, counter);
-    }
+        return greetingService.add(body);
+        }
 
     @DeleteMapping("/greeting/{name}")
     public void deleteGreeting(@PathVariable String name) {
-        counterMap.remove(name);
+        greetingService.delete(name);
     }
 
     @GetMapping("/greeting")
     public Map<String, Long> getAll() {
-        return counterMap;
+        return greetingService.getAll();
     }
 }
