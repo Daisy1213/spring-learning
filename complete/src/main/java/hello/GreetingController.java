@@ -25,12 +25,10 @@ public class GreetingController {
 
     @RequestMapping("/greeting/{name}")
     public Greeting greetingPath(@PathVariable String name) {
-        if (counterMap.get(name) == null) {
-            counterMap.put(name, 1L);
-        } else {
-            counterMap.put(name, counterMap.get(name) + 1);
-        }
-        return new Greeting(counterMap.get(name),
+        Long counter = counterMap.getOrDefault(name, 0L);
+        counterMap.put(name, counter + 1);
+
+        return new Greeting(counter,
                 String.format(template, name));
     }
 }
