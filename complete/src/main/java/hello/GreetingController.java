@@ -1,5 +1,6 @@
 package hello;
 
+import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -20,8 +21,10 @@ public class GreetingController {
 
     @RequestMapping("/greeting/{name}")
     public Greeting greetingPath(@PathVariable String name) {
-        Long counter = counterMap.getOrDefault(name, 0L);
-        counterMap.put(name, counter + 1);
+        Long counter = counterMap.get(name);
+        if (counter == null) {
+            throw new NotFoundException();
+        }
 
         return new Greeting(counter,
                 String.format(template, name));
