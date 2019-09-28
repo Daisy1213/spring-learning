@@ -35,7 +35,7 @@ public class GreetingController {
     }
 
     @PostMapping("/greeting")
-    public Greeting xx(@RequestBody Greeting body) {
+    public Greeting add(@RequestBody Greeting body) {
         String name = body.getName();
         Long counter = body.getCounter();
         counterMap.put(name, counter);
