@@ -42,4 +42,9 @@ public class GreetingController {
 
         return new Greeting(counter, String.format(template, name));
     }
+
+    @DeleteMapping("/greeting/{name}")
+    public void deleteGreeting(@PathVariable String name) {
+        counterMap.remove(name);
+    }
 }
