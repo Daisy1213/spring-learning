@@ -1,9 +1,6 @@
 package hello;
 
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,4 +26,12 @@ public class GreetingController {
         return new Greeting(counter,
                 String.format(template, name));
     }
+
+    @PutMapping("/greeting/{name}/{counter}")
+    public Greeting updateCounter(@PathVariable String name, @PathVariable Long counter) {
+        counterMap.put(name, counter);
+
+        return new Greeting(counterMap.get(name), String.format(template, name));
+    }
+
 }
