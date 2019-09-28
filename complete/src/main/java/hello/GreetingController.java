@@ -33,4 +33,13 @@ public class GreetingController {
 
         return new Greeting(counterMap.get(name), String.format(template, name));
     }
+
+    @PostMapping("/greeting")
+    public Greeting xx(@RequestBody Greeting body) {
+        String name = body.getName();
+        Long counter = body.getCounter();
+        counterMap.put(name, counter);
+
+        return new Greeting(counter, String.format(template, name));
+    }
 }
