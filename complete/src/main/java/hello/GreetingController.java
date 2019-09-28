@@ -47,4 +47,10 @@ public class GreetingController {
     public void deleteGreeting(@PathVariable String name) {
         counterMap.remove(name);
     }
+
+    @GetMapping("/greeting")
+    public Map<String, Long> getAll() {
+        return counterMap;
+    }
+
 }
