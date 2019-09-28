@@ -13,11 +13,9 @@ public class GreetingController {
 
     private static final String template = "Hello, %s!";
     private Long counterOfParam = 0L;
-    private Long counterOfPath = 0L;
     private Map<String, Long> counterMap = new HashMap<>();
 
     @RequestMapping("/greeting")
-
     public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
         return new Greeting(counterOfParam++,
                 String.format(template, name));
