@@ -1,32 +1,8 @@
 package hello;
 
 public class Greeting {
-    private long counter;
-    private String content;
     private String name;
-
-    public Greeting(long counter, String content) {
-        this.counter = counter;
-        this.content = content;
-    }
-
-    public Greeting() { }
-
-    public void setCounter(long counter) {
-        this.counter = counter;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public long getCounter() {
-        return counter;
-    }
-
-    public String getContent() {
-        return content;
-    }
+    private Long counter;
 
     public String getName() {
         return name;
@@ -35,4 +11,22 @@ public class Greeting {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Long getCounter() {
+        return counter;
+    }
+
+    public void setCounter(Long counter) {
+        this.counter = counter;
+    }
+
+    public Greeting(String name, Long counter) {
+        this.name = name;
+        this.counter = counter;
+    }
+
+    public Greeting() {
+
+    }
+
 }

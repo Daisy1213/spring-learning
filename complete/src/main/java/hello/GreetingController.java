@@ -8,25 +8,23 @@ import java.util.Map;
 @RestController
 public class GreetingController {
 
-    private static final String template = "Hello, %s!";
     private Map<String, Long> counterMap = new HashMap<>();
 
     @RequestMapping("/greeting/{name}")
-    public Greeting greetingPath(@PathVariable String name) {
+    public Greeting getOne(@PathVariable String name) {
         Long counter = counterMap.get(name);
         if (counter == null) {
             throw new NotFoundException();
         }
 
-        return new Greeting(counter,
-                String.format(template, name));
+        return new Greeting(name, counter);
     }
 
     @PutMapping("/greeting/{name}")
     public Greeting updateCounter(@PathVariable String name, @RequestBody CounterBody body) {
         counterMap.put(name, body.getCounter());
 
-        return new Greeting(counterMap.get(name), String.format(template, name));
+        return new Greeting(name, counterMap.get(name));
     }
 
     @PostMapping("/greeting")
@@ -35,7 +33,7 @@ public class GreetingController {
         Long counter = body.getCounter();
         counterMap.put(name, counter);
 
-        return new Greeting(counter, String.format(template, name));
+        return new Greeting(name, counter);
     }
 
     @DeleteMapping("/greeting/{name}")
@@ -47,5 +45,4 @@ public class GreetingController {
     public Map<String, Long> getAll() {
         return counterMap;
     }
-
 }
