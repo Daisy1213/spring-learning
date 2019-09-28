@@ -1,4 +1,4 @@
-package hello;
+package learn;
 
 public class CounterBody {
     private Long counter;
